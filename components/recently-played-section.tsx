@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl"
 
 export default function RecentlyPlayedSection() {
   const t = useTranslations("HomePage")
+  const tSearch = useTranslations("Search")
   const [recentGames, setRecentGames] = useState<Game[]>([])
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export default function RecentlyPlayedSection() {
   }, [])
 
   if (recentGames.length === 0) {
-    return null // 如果没有最近玩过的游戏，不显示此部分
+    return <div className="w-full flex items-center justify-center text-center text-[#747171] font-medium">{tSearch("noResults")}</div> // 如果没有最近玩过的游戏，显示此部分
   }
 
   return <GameSlide name={t("recentlyPlayed")} games={recentGames} />

@@ -68,25 +68,14 @@ export default function GameSlide({ name, games, viewAllLink = "" }: GameSlidePr
   }
 
   return (
-    <div className="relative mb-8">
-      {/* 标题和查看更多 */}
-      <div className="flex items-center justify-between mb-4">
-        <Link
-          href={viewAllLink}
-          className="flex items-center gap-2 bg-white text-[#0B459C] px-3 py-1.5 rounded-lg hover:bg-[#0B459C] hover:text-white  transition-colors border-1"
-        >
-          <span className={`icon iconfont icon-${name} text-xl`}></span>
-          <span className="font-bold">{name}</span>
-          <ChevronRight className="w-4 h-4" />
-        </Link>
-      </div>
+    <div className="relative ">
+
 
       {/* 左侧箭头 */}
       {showLeftArrow && (
         <button
           onClick={() => scroll("left")}
-          className="absolute  left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md rounded-full p-2 transition-all cursor-pointer"
-          style={{ marginTop: 20 }}
+          className="absolute  left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md rounded-full p-2 transition-all cursor-pointer"
         >
           <ChevronLeft className="w-6 h-6 text-gray-700" />
         </button>
@@ -103,14 +92,14 @@ export default function GameSlide({ name, games, viewAllLink = "" }: GameSlidePr
             key={`${game.id}`}
             href={`/game/${game.name}`}
             className="block flex-shrink-0 group hover:scale-105 transition-transform duration-300"
-            style={{ width: isMobile ? "calc(40% - 8px)" : "146px" }}
+            style={{ width: isMobile ? "calc(40% - 8px)" : "120px" }}
           >
             <div className="relative aspect-square overflow-hidden rounded-lg">
               <Image
                 src={game.icon || "/placeholder.svg"}
                 alt={game.name}
-                width={146}
-                height={146}
+                width={120}
+                height={120}
                 className="object-cover h-full w-full"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent">
@@ -127,8 +116,7 @@ export default function GameSlide({ name, games, viewAllLink = "" }: GameSlidePr
       {showRightArrow && (
         <button
           onClick={() => scroll("right")}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md rounded-full p-2 transition-all cursor-pointer"
-          style={{ marginTop: 20 }}
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md rounded-full p-2 transition-all cursor-pointer"
         >
           <ChevronRight className="w-5 h-5 text-gray-700" />
         </button>

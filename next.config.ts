@@ -6,7 +6,7 @@ import createNextIntlPlugin from 'next-intl/plugin';
   /* config options here */
   reactStrictMode: true,
   images: {
-    domains: ['cdn.pokiter.com'], // 添加图片域名
+    domains: ['cdn.pokiter.com','cdn-ali.moloagdsp.com'], // 添加图片域名
   },
   
 };

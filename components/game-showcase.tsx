@@ -2,13 +2,15 @@
 
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
-import { addRecentlyPlayedGame } from '@/utils/recently-plyed'
-import { addLikedGame, removeLikedGame, isGameLiked } from '@/utils/like-game'
-import { Game } from "@/data/game"
+import { addRecentlyPlayedGame } from "@/utils/recently-plyed"
+import { addLikedGame, removeLikedGame, isGameLiked } from "@/utils/like-game"
+import type { Game } from "@/data/game"
 import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation" // 添加路由跳转
+
 export default function GameShowcase({ game = {} as Game }: { game?: Game }) {
-  const t = useTranslations("HomePage")
+  const t = useTranslations("Game")
+  const router = useRouter() // 初始化路由
   const [showGame, setShowGame] = useState(false)
   const [liked, setLiked] = useState(false)
   const [disliked, setDisliked] = useState(false)
@@ -33,10 +35,15 @@ export default function GameShowcase({ game = {} as Game }: { game?: Game }) {
     return () => window.removeEventListener("resize", checkIfMobile)
   }, [])
 
-
-
   const playGame = () => {
-    setShowGame(true)
+    if (isMobile) {
+      // 移动端：跳转到游戏框架页面
+      router.push(`/gameframe/${encodeURIComponent(game.name)}`)
+    } else {
+      // PC端：显示iframe
+      setShowGame(true)
+      addRecentlyPlayedGame(game)
+    }
     addRecentlyPlayedGame(game)
   }
 
@@ -74,252 +81,116 @@ export default function GameShowcase({ game = {} as Game }: { game?: Game }) {
   }
 
   return (
-    <div className="relative w-full h-full">
+    <>
+      <div className="relative w-full h-full min-h-[200px]">
+        {!showGame && (
+          <div className="absolute w-full h-[calc(100%-50px)]">
+            <Image
+              src={game.icon || "/placeholder.svg"}
+              alt={game.name}
+              width={1200}
+              height={1200}
+              className="absolute h-full w-full object-cover rounded-t-md opacity-50"
+            />
 
-      {/* 游戏背景图片 */}
-      <div className="absolute inset-0 z-[1] opacity-40 ">
-        <Image
-          src={game.icon}
-          alt={game.name}
-          fill
-          className="object-cover object-center "
-          priority
-        />
-      </div>
+            <div className="absolute inset-0 flex items-center justify-center animate-jello  w-[150] h-[150] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] overflow-hidden">
+              <button title={t("playGame")} className="jello-animation cursor-pointer " onClick={playGame}>
+                <svg height="110" viewBox="0 0 497 497" width="110">
+                  <g>
+                    <path
+                      d="m248.5 0v497c137.243 0 248.5-111.257 248.5-248.5s-111.257-248.5-248.5-248.5z"
+                      fill="#3b88f5"
+                    ></path>
+                    <path
+                      d="m467 248.5c0-137.243-97.826-248.5-218.5-248.5-137.243 0-248.5 111.257-248.5 248.5s111.257 248.5 248.5 248.5c120.674 0 218.5-111.257 218.5-248.5z"
+                      fill="#28abfa"
+                    ></path>
+                    <path
+                      d="m376.978 222.511c0-.01-170.201-98.276-170.201-98.276-5.165-2.975-11.132-4.359-17.1-3.951l-.005 256.432c5.968.407 11.935-.977 17.096-3.956l170.21-98.271c8.977-5.185 15.022-14.878 15.022-25.989s-6.045-20.804-15.022-25.989z"
+                      fill="#c4f3ff"
+                    ></path>
+                    <path
+                      d="m348.935 274.489c7.807-5.185 13.065-14.878 13.065-25.989s-5.258-20.804-13.065-25.989c0-.01-148.026-98.276-148.026-98.276-3.439-2.278-7.288-3.626-11.233-3.951-4.417.301-8.834 1.579-12.927 3.942-9.623 5.556-14.994 15.638-14.996 26.004-.009.005-.009 196.537-.009 196.537.011 10.371 5.382 20.453 15.005 26.009 4.091 2.362 8.508 3.64 12.922 3.941 3.945-.325 7.793-1.675 11.23-3.956z"
+                      fill="#fff"
+                    ></path>
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
 
-      {/* 蒙版层 */}
-      <div className="absolute inset-0 bg-black/60 z-[2] " />
+        {/* 游戏iframe - 确保没有覆盖层 */}
+        {showGame && !isMobile && (
+          <iframe
+            ref={iframeRef}
+            src={game.html}
+            title={game.name}
+            className=" w-full h-[calc(100%-50px)]"
+            allowFullScreen
+          />
+        )}
 
-      {/* 内容容器 */}
-      <div className="absolute flex flex-col items-center justify-center w-full h-full z-10  overflow-hidden">
-        <AnimatePresence mode="wait">
-          {!showGame ? (
-            <motion.div
-              key="game-intro"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="flex flex-col items-center "
-            >
-              {/* 游戏图标 */}
-              <div className="mb-4 rounded-lg overflow-hidden border-2 border-white shadow-lg">
-                <Image
-                  src={game.icon}
-                  alt={game.name}
-                  width={isMobile ? 100 : 150}
-                  height={isMobile ? 100 : 150}
-                  className="object-cover "
-                />
+        {/* 游戏顶部 */}
+        <div className="absolute top-0  flex-1  bg-gray-100 z-10">
+          <Image
+            src={game.icon || "/placeholder.svg"}
+            alt={game.name}
+            width={1200}
+            height={1200}
+            className="absolute h-full w-full object-contain rounded-t-md"
+          />
+        </div>
+
+        {/* 游戏底部 */}
+        <div className="absolute w-full bg-white bottom flex justify-between h-[50px] px-2.5 z-10 bottom-0">
+          <div className="left flex items-center font-bold w-[60%]">
+            <Image
+              src={game.icon || "/placeholder.svg"}
+              alt={game.name}
+              width={38}
+              height={38}
+              className="align-middle rounded-lg mr-3"
+            />
+            {game.name}
+          </div>
+
+          <div className="right flex justify-center items-center">
+            <div className="flex-2 w-full flex justify-center items-center text-sm">
+              <div className="h-full relative flex flex-col items-center text-[#002b51] font-[Roboto] font-medium rounded-lg cursor-pointer w-[50px] transition-all duration-500 py-[10px] portrait:nth-of-type-2:mr-[-51px] landscape:last:w-[24px]">
+                <svg
+                  className="text-[#55a9f3] w-[25px] h-[25px]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                    fill="currentColor"
+                  />
+                </svg>
+                {t("like")}
               </div>
 
-              {/* 播放按钮 */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="bg-white text-black font-bold py-2 px-12 rounded-full text-xl tracking-wider shadow-lg cursor-pointer"
-                onClick={playGame}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                {t("play")}
-              </motion.button>
-            </motion.div>
-          ) : (
-            // <GameFrame onClose={() => setShowGame(false)} isMobile={isMobile} />
-            !isMobile ? (// 如果不是移动设备，则显示游戏iframe
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="w-full h-full max-w-4xl mx-auto bg-black rounded-lg overflow-hidden pb-[68px]"
-              >
-                <iframe
-                  ref={iframeRef}
-                  src={game.html}
-                  title={game.name}
-                  className="w-full h-full border-0"
-                  allowFullScreen
-                />
-              </motion.div>
-            ) : (
-              // 如果是移动设备，则显示全屏游戏
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black z-[100]"
-                style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
-              >
-                <div className="relative w-full h-full">
-                  {/* 游戏iframe - 确保没有覆盖层 */}
-                  <iframe
-                    ref={iframeRef}
-                    src={game.html}
-                    title={game.name}
-                    className="absolute inset-0 w-full h-full border-0 z-[100]"
-                    allowFullScreen
-                    style={{
-                      pointerEvents: "auto",
-                      touchAction: "auto",
-                    }}
+              <div className=" h-full relative flex flex-col items-center text-[#002b51] font-[Roboto] font-medium rounded-lg cursor-pointer w-[50px] transition-all duration-500 py-[10px]">
+                <svg
+                  className="text-[#55a9f3] w-[25px] h-[25px]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
+                    fill="currentColor"
                   />
-
-                  {/* 返回按钮 - 左上角 - 确保z-index高于iframe */}
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setShowGame(false)}
-                    className="absolute top-4 left-4 bg-black/70 text-white w-12 h-12 rounded-full flex items-center justify-center z-[102]"
-                    aria-label="返回"
-                    style={{ touchAction: "manipulation" }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M19 12H5"></path>
-                      <path d="M12 19l-7-7 7-7"></path>
-                    </svg>
-                  </motion.button>
-                </div>
-              </motion.div>
-            )
-
-          )}
-        </AnimatePresence>
-
-
-        {/* 底部控制栏 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="absolute z-10 lg:z-10 bottom-0 left-0 right-0 bg-white flex gap-[4px] flex-col lg:flex-row items-center p-2  "
-        >
-          <div className="flex items-center">
-            <Image
-              src={game.icon}
-              alt={game.name}
-              width={40}
-              height={40}
-              className="mr-2 hidden lg:block rounded-sm"
-            />
-            <span className="text-black font-medium">Geometry Rush 4D</span>
-          </div>
-          <div className="m-0 lg:ml-auto flex items-center space-x-4">
-
-            {/* 点赞 */}
-            <div className="flex items-center">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="flex items-center"
-                onClick={likeFn}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill={liked ? "currentColor" : "none"}
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={`mr-1 ${liked ? "text-blue-500" : "text-gray-700"}`}
-                >
-                  <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
                 </svg>
-                <span className={liked ? "text-blue-500 font-medium" : "text-gray-700"}>{likeCount}</span>
-              </motion.button>
+                {t("share")}
+              </div>
             </div>
-
-            {/* 不喜欢 */}
-            <div className="flex items-center">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="flex items-center"
-                onClick={dislikeFn}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill={disliked ? "currentColor" : "none"}
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={`mr-1 ${disliked ? "text-red-500" : "text-gray-700"}`}
-                >
-                  <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path>
-                </svg>
-                <span className={disliked ? "text-red-500 font-medium" : "text-gray-700"}>{dislikeCount}</span>
-              </motion.button>
-            </div>
-
-            {/* 评论 */}
-            {/* <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="flex items-center text-gray-700"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-              </svg>
-            </motion.button> */}
-
-            {/* 全屏 */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="hidden lg:flex items-center text-gray-700"
-              onClick={() => {
-                if (iframeRef.current) {
-                  iframeRef.current.requestFullscreen()
-                }
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
-                <path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
-                <path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
-                <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
-              </svg>
-            </motion.button>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -49,7 +49,7 @@ export default function LanguageSelector() {
         <div className="relative" ref={menuRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center justify-between w-32 px-3 py-1.5 bg-gray-800 border border-gray-700 rounded-md text-white hover:bg-gray-700 transition-colors"
+                className="flex items-center justify-between w-32 px-3 py-1.5 border border-gray-700 rounded-3xl text-black  transition-colors cursor-pointer"
             >
                 <span>{currentLanguage}</span>
                 {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}

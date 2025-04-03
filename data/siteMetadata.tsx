@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Game',
+  title: 'cqlln | H5 Game',
   author: 'Tails Azimuth',
   headerTitle: 'TailwindBlog',
   description: 'A blog created with Next.js and Tailwind.css',

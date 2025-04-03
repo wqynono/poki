@@ -10,7 +10,6 @@ import { NextIntlClientProvider, Locale, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
 import React from 'react';
-import Header from '../../components/Header'
 import Script from 'next/script'
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -63,9 +62,8 @@ export default async function LocaleLayout({
   params
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: string }>
 }) {
-  // Ensure that the incoming `locale` is valid
   const { locale } = await params;
   const basePath = process.env.BASE_PATH || '';
   if (!hasLocale(routing.locales, locale)) {
@@ -105,8 +103,9 @@ export default async function LocaleLayout({
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1087148471815353"
+        crossOrigin="anonymous"></script>
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
-
         <NextIntlClientProvider>
           <ThemeProviders>
             {/* <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} /> */}
@@ -114,13 +113,11 @@ export default async function LocaleLayout({
             <SearchProvider searchConfig={siteMetadata.search as SearchConfig}> */}
 
             <main className="mb-auto">{children}</main>
-            <Footer />
+
             {/* </SearchProvider>
-            <Footer />
           </SectionContainer> */}
           </ThemeProviders>
         </NextIntlClientProvider>
-
 
       </body>
     </html>

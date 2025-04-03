@@ -33,7 +33,6 @@ const AdComponent = (props: AdsBannerProps) => {
       const ins = document.createElement('ins');
       ins.className = 'adsbygoogle adbanner-customize mt-2';
       ins.style.display = 'block';
-      ins.dataset.adtest = 'on'; // 测试模式，生产环境应移除
       ins.dataset.adClient = 'ca-pub-1838470550408352';
 
       // 设置广告属性

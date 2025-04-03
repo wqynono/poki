@@ -1,291 +1,79 @@
 "use client"
 
-import type React from "react"
-import { useState, useEffect, useRef } from "react"
-import Image from "next/image"
+import { useState } from "react"
 import Link from "next/link"
-import { Search, Heart, Menu, X } from "lucide-react"
-import { AnimatePresence, motion } from "framer-motion"
-import { useTranslations } from "next-intl"
 import SearchModal from "./search-modal"
-import MobileMenu from "./mobile-menu"
-import MyGamesModal from "./my-games-modal"
-import GameCategories from "./game-categories"
-
 export default function Header() {
-  const t = useTranslations("HomePage")
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isMyGamesOpen, setIsMyGamesOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  const searchInputRef = useRef<HTMLDivElement>(null)
-  const searchBoxRef = useRef<HTMLInputElement>(null)
-  // 添加移动端搜索输入框引用
-  const mobileSearchInputRef = useRef<HTMLInputElement>(null)
+    const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const [searchQuery, setSearchQuery] = useState("")
 
-  useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768)
+    const toggleSearch = () => {
+        setIsSearchOpen(!isSearchOpen)
     }
 
-    checkIfMobile()
-    window.addEventListener("resize", checkIfMobile)
+    return (
+        <>
+            <div className="col-span-1 h-full rounded-lg overflow-hidden primary-shadow transition-transform duration-300 bg-white">
+                <Link href="/" className="block h-1/2">
+                    <h1 className="flex items-center justify-center h-full text-3xl font-bold text-[#302B63]">
+                        cqlln
+                    </h1>
+                </Link>
 
-    return () => {
-      window.removeEventListener("resize", checkIfMobile)
-    }
-  }, [])
-
-  // 切换搜索框的显示状态
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen)
-    if (isMobileMenuOpen) setIsMobileMenuOpen(false)
-    if (isMyGamesOpen) setIsMyGamesOpen(false)
-
-    // 根据设备类型聚焦到不同的搜索框
-    if (!isSearchOpen) {
-      setSearchQuery("")
-
-      setTimeout(() => {
-        if (isMobile && mobileSearchInputRef.current) {
-          mobileSearchInputRef.current.focus()
-        } else if (searchBoxRef.current) {
-          searchBoxRef.current.focus()
-        }
-      }, 300) // 增加延迟，等待动画完成
-    }
-  }
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-    if (isSearchOpen) setIsSearchOpen(false)
-    if (isMyGamesOpen) setIsMyGamesOpen(false)
-  }
-
-  const toggleMyGames = () => {
-    setIsMyGamesOpen(!isMyGamesOpen)
-    if (isSearchOpen) setIsSearchOpen(false)
-    if (isMobileMenuOpen) setIsMobileMenuOpen(false)
-  }
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value)
-    if (!isSearchOpen) {
-      setIsSearchOpen(true)
-    }
-  }
-
-  const handleClearSearch = () => {
-    setSearchQuery("")
-    // 根据设备类型聚焦到不同的搜索框
-    if (isMobile && mobileSearchInputRef.current) {
-      mobileSearchInputRef.current.focus()
-    } else if (searchBoxRef.current) {
-      searchBoxRef.current.focus()
-    }
-  }
-
-  return (
-    <>
-      <header className={`w-full relative ${isMobile && isSearchOpen ? "z-40" : "z-auto"}`}>
-        {/* 顶部导航栏 */}
-        <div className={`bg-gray-100 border-b border-gray-200 ${isMobile && isSearchOpen ? "h-[64px]" : "h-auto"}`}>
-          <div
-            className={`container  mx-auto px-4 py-3 flex items-center justify-between  ${isMobile && isSearchOpen ? "fixed top-0 left-0 w-full z-40 bg-white" : "z-auto"}`}
-          >
-            <div className={`${isMobile && isSearchOpen ? "hidden" : "block"} `}>
-              <Link href="/" className="flex items-center">
-                <div className="relative w-12 mr-2 h-10">
-                  <Image
-                    src="../../public/logo.svg"
-                    alt="Jogos 360"
-                    width={24}
-                    height={24}
-                    className="object-contain"
-                  />
-                </div>
-                <div className="font-bold">JOGOS360</div>
-              </Link>
-            </div>
-            <div className="hidden md:flex items-center space-x-4">
-              <Link href="/category/Top" className="text-gray-700 hover:text-blue-500 transition-colors duration-200">
-                {t("topGames")}
-              </Link>
-              <span className="text-gray-400">•</span>
-
-              <button
-                onClick={toggleMyGames}
-                className="bg-[#5f9915] hover:bg-[#427100] cursor-pointer text-white font-medium py-1.5 px-4 rounded-md transition-colors duration-200 flex items-center"
-              >
-                <Heart className="w-4 h-4 mr-1" />
-                {t("myGames")}
-              </button>
-
-              {/* 桌面端搜索输入框 */}
-              <div className="relative z-40">
-                <div className="relative">
-                  {/* 桌面端搜索模态框 */}
-                  <SearchModal
-                    onClose={toggleSearch}
-                    isOpen={isSearchOpen}
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                  />
-
-                  <input
-                    ref={searchBoxRef}
-                    type="text"
-                    placeholder={t("searchGames")}
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                    onClick={() => !isSearchOpen && toggleSearch()}
-                    className="bg-gray-100 border border-gray-300 rounded-full py-1.5 pl-4 pr-10 w-[400px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                  {searchQuery && (
-                    <button
-                      onClick={handleClearSearch}
-                      className="absolute right-12 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                <div className="h-1/2 flex items-center justify-center border-t-2 border-[#5d6b842e] rounded-b-lg bg-white">
+                    <Link
+                        href="/"
+                        title="Home"
+                        aria-label="Home"
+                        className="flex items-center justify-center h-full w-1/2 border-r border-[#5d6b842e]"
                     >
-                      <X className="w-5 h-5" />
+                        <svg
+                            className="w-6 h-6 fill-black"
+                            viewBox="0 0 1024 1024"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            p-id="3210"
+                        >
+                            <path
+                                d="M999.103969 450.980217 600.03496 32.435355C559.394816-10.188151 492.394773-10.891714 450.867491 30.861655L26.049704 457.992209C-23.655972 507.968481 1.212199 568.281046 71.688022 567.83196L191.983925 567.065422 156.438281 531.756441 156.438281 917.836305C156.438281 976.336883 203.589196 1023.825676 261.911636 1023.825676L389.99329 1023.825676 389.99329 953.206301 261.911636 953.206301C242.721404 953.206301 227.0793 937.452108 227.0793 917.836305L227.0793 531.756441C227.0793 512.167492 211.12822 496.322622 191.533656 496.447477L71.237753 497.214033C66.173938 497.246289 62.895469 496.713148 61.736428 496.22598 63.980271 497.169102 67.084328 499.993735 69.04654 504.752651 70.980045 509.441972 70.786089 513.494624 69.931418 515.610663 70.455361 514.313455 72.463158 511.484602 76.143505 507.784218L500.961291 80.653664C514.458349 67.083127 535.692465 67.306108 548.901395 81.159669L947.970422 499.704531C951.487338 503.393087 953.386928 506.221746 953.891186 507.578027 953.219595 505.771654 953.125848 502.205128 954.837927 498.082651 956.584273 493.877656 959.306191 491.320776 961.229598 490.464427 960.049848 490.989677 956.841363 491.570786 951.877986 491.602406L952.328255 562.22035C1022.230896 561.774919 1047.266224 501.492949 999.103969 450.980217ZM774.238215 1023.825676C832.500577 1023.825676 879.711571 976.292569 879.711571 917.836305L879.711571 527.597754 844.616195 562.906718 952.328255 562.22035 951.877986 491.602406 844.165926 492.288773C824.747205 492.412516 809.070551 508.184576 809.070551 527.597754L809.070551 917.836305C809.070551 937.402462 793.373788 953.206301 774.238215 953.206301L646.156562 953.206301 646.156562 1023.825676 774.238215 1023.825676ZM582.482144 670.786834C582.575273 670.786834 582.632792 1023.982363 582.632792 1023.982363L653.273812 1023.982363 653.273812 670.618548C653.273812 631.73658 621.484606 600.16746 582.482144 600.16746L441.501384 600.16746C402.513769 600.16746 370.709699 631.646628 370.709699 670.618548L441.350736 670.618548C441.350736 670.806978 582.482144 670.786834 582.482144 670.786834ZM441.350736 670.618548 370.709699 670.618548 370.709699 1023.982363 441.350736 1023.982363 441.350736 670.618548Z"
+                                fill="#302B63"
+                                p-id="3211"
+                            ></path>
+                        </svg>
+                    </Link>
+                    <button
+                        type="button"
+                        title="search"
+                        aria-label="search"
+                        id="openModal"
+                        onClick={toggleSearch}
+                        className="flex items-center justify-center h-full w-1/2 border-l border-[#5d6b842e] hover:bg-[#5d6b842e] bg-transparent border-0 cursor-pointer font-inherit text-base"
+                    >
+                        <span className="sr-only">你今天要玩什么呢？</span>
+                        <svg
+                            className="w-6 h-6"
+                            viewBox="0 0 1024 1024"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            p-id="2312"
+                        >
+                            <path
+                                d="M469.312 42.688a426.688 426.688 0 1 0 270.08 756.992l169.088 169.152a42.688 42.688 0 0 0 60.352-60.352l-169.152-169.152A426.688 426.688 0 0 0 469.312 42.624zM128 469.312a341.312 341.312 0 1 1 682.688 0A341.312 341.312 0 0 1 128 469.312z"
+                                fill="#302B63"
+                                p-id="2313"
+                            ></path>
+                        </svg>
                     </button>
-                  )}
-                  <Link
-                    href={`${searchQuery ? `/search/${encodeURIComponent(searchQuery)}` : "#"}`}
-                    className="absolute right-0 top-0 h-full px-3 flex items-center justify-center bg-[#5f9915] rounded-r-full"
-                  >
-                    <Search className="w-5 h-5 text-white" />
-                  </Link>
                 </div>
-              </div>
             </div>
 
-            <div className="flex md:hidden items-center space-x-2">
-              <motion.div
-                initial={false}
-                animate={isSearchOpen ? "open" : "closed"}
-                variants={{
-                  open: { width: "calc(100vw - 80px)", opacity: 1 },
-                  closed: { width: 0, opacity: 0 },
-                }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <input
-                  ref={mobileSearchInputRef}
-                  type="text"
-                  placeholder={t("searchGames")}
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                  className="w-full h-10 bg-gray-100 border border-gray-300 rounded-full py-1.5 pl-4 pr-10 focus:outline-none  focus:border-transparent"
-                />
-              </motion.div>
-
-              <button onClick={toggleSearch} className="p-2 rounded-full bg-green-600 text-white flex-shrink-0">
-                {isSearchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
-              </button>
-
-              <button
-                onClick={toggleMyGames}
-                className={`${isSearchOpen && isSearchOpen ? "hidden" : "inline-block"} p-2 rounded-full bg-green-600 text-white flex-shrink-0`}
-              >
-                <Heart className="w-5 h-5" />
-              </button>
-              <button
-                onClick={toggleMobileMenu}
-                className={`${isSearchOpen && isSearchOpen ? "hidden" : "inline-block"} p-2 rounded-full bg-green-600 text-white flex-shrink-0`}
-              >
-                <Menu className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* 游戏分类导航 */}
-        <div className="bg-[#1e3a8a] text-white">
-          <div className="mx-auto hidden lg:block">
-            <GameCategories />
-          </div>
-        </div>
-      </header>
-
-      {/* 搜索遮罩层 */}
-      <AnimatePresence>
-        {isSearchOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-30"
-            onClick={toggleSearch}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* 移动端搜索界面 */}
-      <AnimatePresence>
-        {isSearchOpen && isMobile && (
-          <>
-            {/* 移动端搜索结果 */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              ref={searchInputRef}
-              className="fixed top-0 left-0 right-0 bg-white z-40 max-h-[70vh] overflow-y-auto rounded-b-lg shadow-lg"
-            >
-              <SearchModal
-                isOpen={true}
+            <SearchModal
+                isOpen={isSearchOpen}
                 onClose={toggleSearch}
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
-              />
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* 移动端菜单 */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.3, type: "spring" }}
-            className="fixed inset-0 z-50 bg-[#1e3a8a]"
-          >
-            <MobileMenu onClose={toggleMobileMenu} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* 我的游戏弹窗 */}
-      <AnimatePresence>
-        {isMyGamesOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/50 z-40"
-              onClick={toggleMyGames}
             />
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.3, type: "spring" }}
-              className="fixed top-0 right-0 h-full w-80 max-w-lg z-50 bg-white shadow-xl"
-            >
-              <MyGamesModal onClose={toggleMyGames} />
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </>
-  )
+        </>
+    )
 }
 

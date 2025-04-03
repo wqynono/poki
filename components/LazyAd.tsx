@@ -3,7 +3,8 @@
 
 import { useInView } from 'react-intersection-observer';
 import dynamic from 'next/dynamic';
-
+import { useTranslations } from "next-intl"
+import adConfig from '@/data/adConfig';
 const AdComponent = dynamic(
     () => import('@/components/ad'),
     { ssr: false }
@@ -14,7 +15,7 @@ export default function LazyAd() {
         triggerOnce: true,
         threshold: 0.1,
     });
-
+    const t = useTranslations("HomePage")
     return (
         <div
             ref={ref}
@@ -24,11 +25,11 @@ export default function LazyAd() {
             {inView && (
                 <div style={{ height: "auto !important", minHeight: "0px !important" }}>
                     <div className="flex items-center text-center justify-center text-[#747171] font-medium">
-                        Advertisement
+                        {t("advertisement")}
                     </div>
                     <div className="ads block">
                         <AdComponent
-                            data-ad-slot="222222"
+                            data-ad-slot={adConfig.zfx[1]}
                             data-ad-format="auto"
                             data-full-width-responsive={true}
                         />
