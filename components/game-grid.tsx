@@ -12,10 +12,8 @@ export default function GameGrid({
 }) { // 中间卡片的索引
   const middleIndex = [20, 21, 31, 41, 51, 61, 75, 78, 80, 91, 101, 120]
 
-
   return (
     <>
-
       {gamelist.map((game, index) => {
 
         return (
