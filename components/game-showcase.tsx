@@ -91,6 +91,8 @@ export default function GameShowcase({ game = {} as Game }: { game?: Game }) {
               alt={game.name}
               width={1200}
               height={1200}
+              priority={true}
+              loading="eager"
               className="absolute h-full w-full object-cover rounded-t-md opacity-50"
             />
 
@@ -139,6 +141,8 @@ export default function GameShowcase({ game = {} as Game }: { game?: Game }) {
             alt={game.name}
             width={1200}
             height={1200}
+            priority={true}
+            loading="eager"
             className="absolute h-full w-full object-contain rounded-t-md"
           />
         </div>
@@ -151,6 +155,8 @@ export default function GameShowcase({ game = {} as Game }: { game?: Game }) {
               alt={game.name}
               width={38}
               height={38}
+              priority={true}
+              loading="eager"
               className="align-middle rounded-lg mr-3"
             />
             {game.name}

@@ -84,7 +84,11 @@
     "topGames": "인기 게임",
     "back": "뒤로",
     "share": "공유",
-    "like": "좋아요"
+    "like": "좋아요",
+    "playGame": "게임 시작하기 클릭",
+    "gameDescription": "게임 설명",
+    "detail": "상세정보",
+    "similarGames": "관련 게임"
   },
   "Categories": {
     "action": "액션",

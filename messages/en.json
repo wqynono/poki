@@ -84,7 +84,11 @@
     "topGames": "Top Games",
     "back": "back",
     "share": "Share",
-    "like": "Like"
+    "like": "Like",
+    "playGame": "Click to Start Game",
+    "gameDescription": "Game Description",
+    "detail": "Details",
+    "similarGames": "Related Games"
   },
   "Categories": {
     "action": "Action",

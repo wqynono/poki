@@ -49,6 +49,8 @@ export default function GamePage({ params }: any) {
             alt={gameDetail.name}
             width={1200}
             height={1200}
+            priority={true}
+            loading="eager"
             className="h-full w-full object-cover rounded-t-md opacity-40"
           />
         </div>
@@ -62,6 +64,8 @@ export default function GamePage({ params }: any) {
                   alt={gameDetail.name}
                   width={180}
                   height={180}
+                  priority={true}
+                  loading="eager"
                   className="object-cover rounded-xl"
                 />
               </div>

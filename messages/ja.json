@@ -84,7 +84,11 @@
     "topGames": "トップゲーム",
     "back": "戻る",
     "share": "シェア",
-    "like": "いいね"
+    "like": "いいね",
+    "playGame": "ゲームを開始するをクリック",
+    "gameDescription": "ゲームの説明",
+    "detail": "詳細",
+    "similarGames": "関連ゲーム"
   },
   "Categories": {
     "action": "アクション",

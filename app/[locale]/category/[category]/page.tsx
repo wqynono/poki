@@ -21,7 +21,7 @@ export async function generateMetadata(
   const tDesc = await getTranslations("CategoriesDesc");
 
   return {
-    title: `${t(category.toLowerCase())} ${tHome("games")}`,
+    title: `${t(category.toLowerCase())}${tHome("games")}`,
     description: tDesc(category.toLowerCase()),
   };
 }
@@ -77,9 +77,9 @@ export default async function Category({ params }: Props) {
           </div>
         </div>
       </div>
+      <Intro />
+      <Footer />
       <div>
-        <Intro />
-        <Footer />
       </div>
     </div>
   );

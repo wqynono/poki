@@ -84,7 +84,11 @@
     "topGames": "Лучшие игры",
     "back": "назад",
     "share": "Поделиться",
-    "like": "Нравится"
+    "like": "Нравится",
+    "playGame": "Нажмите, чтобы начать игру",
+    "gameDescription": "Описание игры",
+    "detail": "Детали",
+    "similarGames": "Похожие игры"
   },
   "Categories": {
     "action": "Экшен",

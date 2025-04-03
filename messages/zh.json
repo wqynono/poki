@@ -86,7 +86,10 @@
     "back": "返回",
     "share": "分享",
     "like": "喜欢",
-    "playGame": "点击开始游戏"
+    "playGame": "点击开始游戏",
+    "gameDescription": "游戏描述",
+    "detail": "详情",
+    "similarGames": "相关游戏"
   },
   "Categories": {
     "action": "动作",
