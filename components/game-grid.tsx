@@ -30,9 +30,10 @@ export default function GameGrid({
                 src={game.icon || "/placeholder.svg"}
                 width={200}
                 height={200}
-                priority={index < 12 ? true : false} // 如果是LCP元素则标记为高优先级
-                loading={index < 12 ? "eager" : "lazy"} // 禁用懒加载（对LCP元素很重要）
+                priority={true} // 如果是LCP元素则标记为高优先级
+                loading={"eager"} // 禁用懒加载（对LCP元素很重要）
                 placeholder="blur" // 添加模糊占位符
+                quality={80}
                 className="w-full h-full object-cover"
                 blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmN2ZhIi8+PC9zdmc+"
               />
@@ -67,6 +68,7 @@ export default function GameGrid({
                 priority={index < 12 ? true : false} // 如果是LCP元素则标记为高优先级
                 loading={index < 12 ? "eager" : "lazy"} // 禁用懒加载（对LCP元素很重要）
                 placeholder="blur" // 添加模糊占位符
+                quality={50}
                 className="w-full h-full object-cover"
                 blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmN2ZhIi8+PC9zdmc+"
 
@@ -89,11 +91,6 @@ export default function GameGrid({
               ></div>
             </Link>
           )
-
-
-
-
-
         )
       })}
     </>
