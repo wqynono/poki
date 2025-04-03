@@ -27,8 +27,8 @@ export default function GameGrid({
             <Image
               alt={game.name}
               src={game.icon || "/placeholder.svg"}
-              width={200}
-              height={200}
+              width={isMiddleCard ? 200 : 120}
+              height={isMiddleCard ? 200 : 120}
               priority={isMiddleCard ? true : false} // 如果是LCP元素则标记为高优先级
               loading={isMiddleCard ? "eager" : "lazy"} // 禁用懒加载（对LCP元素很重要）
               placeholder="blur" // 添加模糊占位符
