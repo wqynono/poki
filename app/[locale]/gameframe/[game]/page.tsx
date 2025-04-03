@@ -85,7 +85,7 @@ export default function GamePage({ params }: any) {
                 <div className="w-full flex items-center justify-center text-center text-[#cfcfcf] font-medium">
                   {t("advertisement")}
                 </div>
-                <div className="block">
+                <div className="block min-w-[320px] min-height-[270px]">
                   <AdComponent data-ad-slot={adConfig.zfx[0]} data-ad-format={"auto"} data-full-width-responsive={true} />
                 </div>
               </div>

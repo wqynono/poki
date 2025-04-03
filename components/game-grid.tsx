@@ -21,7 +21,7 @@ export default function GameGrid({
           <Link
             key={String(game.id)}
             className={`relative overflow-hidden cursor-pointer rounded-lg shadow-lg col-span-1 row-span-1 
-              ${isMiddleCard ? "md:col-span-2 md:row-span-2" : ""} aspect-square group`}
+              ${isMiddleCard ? "col-span-2 row-span-2" : ""} aspect-square group`}
             href={`/game/${game.name}`}
           >
             <Image

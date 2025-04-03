@@ -27,7 +27,7 @@ export default function LazyAd() {
                     <div className="flex items-center text-center justify-center text-[#747171] font-medium">
                         {t("advertisement")}
                     </div>
-                    <div className="ads block">
+                    <div className="ads block min-w-[320px] min-h-[270px]">
                         <AdComponent
                             data-ad-slot={adConfig.zfx[1]}
                             data-ad-format="auto"

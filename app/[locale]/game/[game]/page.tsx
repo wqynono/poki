@@ -79,7 +79,7 @@ export default async function GamePage({ params }: Props) {
                 <div className="w-full flex items-center justify-center text-center text-[#747171] font-medium">
                   {t("advertisement")}
                 </div>
-                <div className="block">
+                <div className="block min-w-[320px] min-height-[270px]">
                   <AdComponent data-ad-slot={adConfig.hx} data-ad-format={"auto"} data-full-width-responsive={true} />
                 </div>
               </div>
