@@ -9,22 +9,7 @@ import React from "react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
 import adConfig from "@/data/adConfig"
-import type { Metadata } from 'next'
 
-type Props = {
-  params: Promise<{ gameName: string }>
-}
-
-export async function generateMetadata(
-  { params }: Props,
-): Promise<Metadata> {
-  const { gameName } = await params
-
-  return {
-    title: gameName,
-    description: defaultGamelist.find((item) => item.name === gameName)?.desc_text,
-  };
-}
 
 export default function GamePage({ params }: any) {
   const t = useTranslations("Game")
