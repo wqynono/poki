@@ -12,26 +12,26 @@ import adConfig from "@/data/adConfig"
 import type { Metadata } from 'next'
 
 type Props = {
-  params: Promise<{ gameName: string }>
+  params: Promise<{ game: string }>
 }
 
 export async function generateMetadata(
   { params }: Props,
 ): Promise<Metadata> {
-  const { gameName } = await params
+  const { game } = await params
 
   return {
-    title: gameName,
-    description: defaultGamelist.find((item) => item.name === gameName)?.desc_text,
+    title: game,
+    description: defaultGamelist.find((item) => item.name === game)?.desc_text,
   };
 }
 
 export default async function GamePage({ params }: Props) {
   const t = await getTranslations("Game")
   const tHome = await getTranslations("HomePage")
-  const { gameName } = await params
-  console.log(params)
-  const gameDetail: Game = defaultGamelist.find((item) => item.name === gameName) || ({} as Game)
+  const { game } = await params
+  console.log(game)
+  const gameDetail: Game = defaultGamelist.find((item) => item.name === game) || ({} as Game)
   const showGames = defaultGamelist.filter(
     (item) => item.category === gameDetail.category && item.name !== gameDetail.name,
   )

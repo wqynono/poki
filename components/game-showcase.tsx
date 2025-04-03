@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation" // 添加路由跳转
 
 export default function GameShowcase({ game = {} as Game }: { game?: Game }) {
   const t = useTranslations("Game")
+  const tHome = useTranslations("HomePage")
   const router = useRouter() // 初始化路由
   const [showGame, setShowGame] = useState(false)
   const [liked, setLiked] = useState(false)
@@ -94,7 +95,7 @@ export default function GameShowcase({ game = {} as Game }: { game?: Game }) {
             />
 
             <div className="absolute inset-0 flex items-center justify-center animate-jello  w-[150] h-[150] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] overflow-hidden">
-              <button title={t("playGame")} className="jello-animation cursor-pointer " onClick={playGame}>
+              <button title={tHome("playGame")} className="jello-animation cursor-pointer " onClick={playGame}>
                 <svg height="110" viewBox="0 0 497 497" width="110">
                   <g>
                     <path
