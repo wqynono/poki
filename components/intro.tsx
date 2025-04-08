@@ -2,12 +2,13 @@ import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { categoryList } from "@/data/game"
 import Image from "next/image"
+import { defaultGamelist } from "@/data/game"
 export default function Intro() {
     const homeT = useTranslations("HomePage")
     const domain = "cqlln.com"; // 网站域名
     return (
         <div className="text-gray-700 text-sm leading-relaxed space-y-6 bg-white m-4">
-            <div className="flex flex-wrap gap-4 px-4 mb-4">
+            <div className="flex flex-wrap gap-4 mb-4">
                 {categoryList.map((category, index) => (
                     <Link
                         key={index}
@@ -21,66 +22,38 @@ export default function Intro() {
                             alt={category.name}
                             className="object-contain h-24 md:h-22 w-auto"
                         />
-                        <span className="font-bold text-xl md:text-sm text-center truncate">
+                        <span className="font-bold text-sm md:text-lg text-center truncate">
                             {category.name} Games
                         </span>
                     </Link>
                 ))}
             </div>
             <div className="mb-4  p-6 rounded-xl primary-shadow ">
-                <p>{homeT("catalogDesc", { domain })}</p>
-                <p>
+                <h2 className="text-sm md:text-lg font-bold text-gray-800 mb-4">{homeT("catalogDesc", { domain })}</h2>
+                <h3 className="text-sm  font-medium text-gray-800 mb-4">
                     {homeT("popularGamesDesc")}
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        Fireboy and Watergirl
-                    </Link>
-                    ,{" "}
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        Moto X3M
-                    </Link>
-                    ,{" "}
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        Penalty Shooters 2
-                    </Link>
-                    ,{" "}
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        Bad Ice Cream
-                    </Link>
-                    ,{" "}
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        Bubble Shooter
-                    </Link>
-                    , {homeT("andMore")}{" "}
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        Tic-Tac-Toe
-                    </Link>
-                    ,{" "}
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        Pac-Man
-                    </Link>
-                    ,{" "}
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        Solitaire
-                    </Link>
-                    ,{" "}
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        2048
-                    </Link>
-                    ,{" "}
-                    <Link href="/" className="text-blue-600 hover:underline">
-                        Dino Chrome.
-                    </Link>
-                </p>
+
+
+
+                    {defaultGamelist.slice(0, 8).map((game, index) => {
+                        return index !== 6 ? (
+                            <Link key={index} href={`/game/${game.name}`} className="text-[#002b51] underline">
+                                <span>{game.name},  </span>
+                            </Link>
+                        ) : <span>{homeT("andMore")}  </span>
+                    })
+                    }
+                </h3>
 
                 {/* 网站介绍*/}
                 <div>
-                    <h2 className="text-xl font-bold text-gray-800 mb-4">{homeT("findFavoriteGames")}</h2>
-                    <p className="mb-4">{homeT("gamesOrganized")}</p>
+                    <h2 className="text-sm md:text-lg font-bold text-gray-800 mb-4">{homeT("findFavoriteGames")}</h2>
+                    <h3 className="mb-4">{homeT("gamesOrganized")}</h3>
                     <ul className="list-disc pl-6 space-y-1">
                         {categoryList.slice(0, 5).map((category, index) => {
                             return (
                                 <li key={index} >
-                                    <Link href={category.href} className="text-blue-600 hover:underline">
+                                    <Link href={category.href} className="text-[#002b51] underline">
                                         <span>{category.name} Games</span>
                                     </Link>
                                 </li>
@@ -91,9 +64,9 @@ export default function Intro() {
 
                 {/* 关于网站 */}
                 <div>
-                    <h2 className="text-xl font-bold text-gray-800 mb-4">{homeT("about", { domain })}</h2>
-                    <p className="mb-4">{homeT("aboutDesc1", { domain })}</p>
-                    <p className="mb-4">{homeT("aboutDesc2", { domain })}</p>
+                    <h2 className="text-sm md:text-lg font-bold text-gray-800 mb-4">{homeT("about", { domain })}</h2>
+                    <h3 className="text-sm font-b text-gray-800 mb-4">{homeT("aboutDesc1", { domain })}</h3>
+                    <h3 className="text-sm font-b text-gray-800 mb-4">{homeT("aboutDesc2", { domain })}</h3>
                 </div>
             </div>
         </div>

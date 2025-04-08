@@ -115,5 +115,10 @@
     "Adventure": "무료 어드벤처 게임을 탐험하세요! PC나 모바일에서 판타지 세계로 떠나 퍼즐을 풀고 친구와 함께 흥미진진한 여정을 떠나보세요. 몰입감 넘치는 스토리로 언제 어디서나 모험을 시작하세요!",
     "Arcade": "클래식한 아케이드 게임을 무료로 즐기세요! PC나 모바일에서 레트로 스타일의 빠른 템포 도전에 참여하고, 최고 점수를 노리며 친구와 대결하세요. 설치 없이 바로 플레이 가능합니다!",
     "Girl": "여성을 위한 무료 게임을 발견하세요! PC나 모바일에서 패션, 장식, 시뮬레이션 게임을 즐겨보세요. 다운로드 없이 전용의 재미를 바로 시작하세요!"
+  },
+  "NotFound": {
+    "title": "404 Not Found",
+    "description": "Sorry, the page you are looking for does not exist or has been removed.",
+    "backHome": "back to home"
   }
 }

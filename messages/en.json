@@ -24,8 +24,8 @@
     "about": "About {domain}",
     "aboutDesc1": "{domain} is a free online gaming platform. Our expert team's goal is to provide the best selection of games on the web and deliver an excellent experience for players.",
     "aboutDesc2": "{domain} is accessible directly from your browser and serving players from various countries and languages. Our goal is to provide a fun, functional, and cost-free experience for all users.",
-    "catalogDesc": "Our game catalog is carefully curated by our team of experts. With thousands of games for all tastes and ages, around 2 million players choose {domain} every month to play and have fun.",
-    "popularGamesDesc": "Some of the most popular games include hits like",
+    "catalogDesc": "🎮 🚀 Our game catalog is carefully curated by our team of experts. With thousands of games for all tastes and ages, around 2 million players choose {domain} every month to play and have fun.",
+    "popularGamesDesc": "📱 Some of the most popular games include hits like",
     "andMore": "and many more. Fans of classic games can enjoy online favorites such as",
     "searchFor": "Search for",
     "games": "Games"
@@ -115,5 +115,10 @@
     "adventure": "Explore free adventure games! On PC or mobile, dive into fantasy worlds, solve puzzles, and embark on exciting journeys with friends. Immersive storytelling—start your adventure now!",
     "arcade": "Play classic arcade games for free! On PC or mobile, enjoy retro-style fast-paced challenges, beat high scores, and compete with friends. No installation needed—start playing instantly!",
     "girl": "Discover free games designed for girls! On PC or mobile, enjoy fashion, decoration, and simulation games. No downloads needed—start your exclusive fun now!"
+  },
+  "NotFound": {
+    "title": "404 Not Found",
+    "description": "Sorry, the page you are looking for does not exist or has been removed.",
+    "backHome": "back to home"
   }
 }
