@@ -94,6 +94,7 @@ export default async function GamePage({ params }: Props) {
           <div
             className="grid gap-4 justify-center grid-cols-3 md:grid-cols-7 lg:grid-cols-9 xl:grid-cols-12 2xl:grid-cols-14"
             id="content"
+            style={{ height: "auto !important" }}
           >
             {/* 广告区域1 */}
             <div
@@ -102,12 +103,15 @@ export default async function GamePage({ params }: Props) {
               lg:row-start-2 lg:col-start-7
               xl:row-start-2 xl:col-start-10
               2xl:row-start-2 2xl:col-start-12"
+              style={{ height: "auto !important" }}
             >
-              <div className="w-full flex items-center justify-center text-center text-[#747171] font-medium">
-                {t("advertisement")}
-              </div>
-              <div className="block min-w-[320px] min-height-[270px]">
-                <AdComponent data-ad-slot={adConfig.hx} data-ad-format={"auto"} data-full-width-responsive={true} />
+              <div style={{ height: "auto !important", minHeight: "0px !important" }}>
+                <div className="w-full flex items-center justify-center text-center text-[#747171] font-medium">
+                  {t("advertisement")}
+                </div>
+                <div className="block min-w-[320px] min-height-[270px]">
+                  <AdComponent data-ad-slot={adConfig.hx} data-ad-format={"auto"} data-full-width-responsive={true} />
+                </div>
               </div>
             </div>
 
