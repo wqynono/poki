@@ -23,7 +23,6 @@ export default async function About() {
                     <div
                         className="grid gap-4 justify-center grid-cols-3 md:grid-cols-7 lg:grid-cols-9 xl:grid-cols-12 2xl:grid-cols-14"
                         id="content"
-                        style={{ height: "auto !important" }}
                     >
                         <div className="min-h-24 min-w-24">
                             {/* 头部区域 */}

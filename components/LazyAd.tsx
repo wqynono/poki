@@ -20,10 +20,9 @@ export default function LazyAd() {
         <div
             ref={ref}
             className="col-span-3 row-span-3 row-start-12 md:col-span-3 md:row-span-3 lg:col-start-1 lg:col-span-3 lg:row-span-3 lg:row-start-5 border-1 border-[#cecece] rounded-lg overflow-hidden   bg-white"
-            style={{ height: "auto !important" }}
         >
             {inView && (
-                <div style={{ height: "auto !important", minHeight: "0px !important" }}>
+                <div>
                     <div className="flex items-center text-center justify-center text-[#747171] font-medium">
                         {t("advertisement")}
                     </div>

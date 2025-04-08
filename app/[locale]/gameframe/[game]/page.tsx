@@ -85,13 +85,11 @@ export default function GamePage({ params }: any) {
 
             {/* 广告区域 */}
             <div className="border border-[#cecece] rounded-lg min-w-[330px] min-h-[270px]">
-              <div style={{ height: "auto !important", minHeight: "0px !important" }}>
-                <div className="w-full flex items-center justify-center text-center text-[#cfcfcf] font-medium">
-                  {t("advertisement")}
-                </div>
-                <div className="block min-w-[320px] min-height-[270px]">
-                  <AdComponent data-ad-slot={adConfig.zfx[0]} data-ad-format={"auto"} data-full-width-responsive={true} />
-                </div>
+              <div className="w-full flex items-center justify-center text-center text-[#cfcfcf] font-medium">
+                {t("advertisement")}
+              </div>
+              <div className="block min-w-[320px] min-height-[270px]">
+                <AdComponent data-ad-slot={adConfig.zfx[0]} data-ad-format={"auto"} data-full-width-responsive={true} />
               </div>
             </div>
 

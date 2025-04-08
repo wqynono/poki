@@ -20,7 +20,7 @@ export default function Intro() {
                             width={204}
                             height={204}
                             alt={category.name}
-                            className="object-contain h-24 md:h-22 w-auto"
+                            className="object-contain h-24 md:h-22 w-auto aspect-square"
                         />
                         <span className="font-bold text-sm md:text-lg text-center truncate">
                             {category.name} Games

@@ -9,8 +9,8 @@ export default function Footer() {
     <footer className="bg-white primary-shadow m-t-8 rounded-2xl w-full mb-4">
       <div className="flex flex-col items-center justify-between md:flex-row w-full p-4">
         <div className="flex min-w-3xs items-center">
-          <div style={{ marginRight: "12px" }}>
-            <a href="./index.html" rel="noopener" style={{ display: "flex", alignItems: "center" }}>
+          <div className="mr-3">
+            <a href="./index.html" rel="noopener" className="flex items-center">
               {/* <Image src="./images/logo.png" title="logo" width="50" height="50" alt="logo" /> */}
             </a>
           </div>

@@ -205,7 +205,6 @@ export default function SearchModal({ onClose, isOpen, searchQuery, setSearchQue
                 <div
                   className="grid gap-4 justify-center grid-cols-4 md:grid-cols-5 lg:grid-cols-7"
                   id="content"
-                  style={{ height: "auto !important" }}
                 >
                   <GameGrid gamelist={searchResults.slice(0, 20)} gamePcLength={searchResults.slice(0, 20).length} />
                 </div>
@@ -216,7 +215,6 @@ export default function SearchModal({ onClose, isOpen, searchQuery, setSearchQue
               <div
                 className="grid gap-4 justify-center grid-cols-4 md:grid-cols-5 lg:grid-cols-7"
                 id="content"
-                style={{ height: "auto !important" }}
               >
                 <GameGrid gamelist={defaultGamelist.slice(0, 12)} gamePcLength={defaultGamelist.slice(0, 12).length} />
               </div>
