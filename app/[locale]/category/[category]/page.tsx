@@ -7,7 +7,7 @@ import Footer from "@/components/footer";
 import Intro from "@/components/intro";
 import adConfig from "@/data/adConfig";
 import type { Metadata } from 'next'
-
+import siteMetadata from "@/data/siteMetadata";
 type Props = {
   params: Promise<{ category: string }>
 }
@@ -29,12 +29,31 @@ export async function generateMetadata(
 export default async function Category({ params }: Props) {
   const t = await getTranslations("HomePage"); // 获取 HomePage 翻译
   const { category } = await params; // 解构 category 参数
+  const tDesc = await getTranslations("CategoriesDesc");
 
   // 根据分类过滤游戏列表
   const gamelist = defaultGamelist.filter((game) => game.category === category);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": `${t(category)} - ${siteMetadata.name}`,
+    "url": siteMetadata.siteUrl,
+    "description": `${tDesc(category.toLowerCase())}`,
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": gamelist
+    }
+  }
 
   return (
     <div className="min-h-screen">
+      <section>
+        <script
+          async
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </section>
       <div className="max-w-full mx-auto xl:max-w-[91.67%]">
         <div className="mx-auto px-4 py-6">
           {/* 主内容区域 */}
@@ -48,7 +67,7 @@ export default async function Category({ params }: Props) {
 
             {/* 广告区域 */}
             <div
-              className="col-span-3 row-span-3 row-start-4 md:col-span-3 md:row-span-3 lg:col-start-1 lg:col-span-3 lg:row-start-2 border-1 border-[#cecece] rounded-lg overflow-hidden"
+              className="bg-white col-span-3 row-span-3 row-start-4 md:col-span-3 md:row-span-3 lg:col-start-1 lg:col-span-3 lg:row-start-2 border-1 border-[#cecece] rounded-lg overflow-hidden"
               style={{ height: "auto !important", minHeight: "0px !important" }}
             >
               <div style={{ height: "auto !important", minHeight: "0px !important" }}>
@@ -76,9 +95,9 @@ export default async function Category({ params }: Props) {
             <GameGrid gamelist={gamelist} gamePcLength={gamelist.length} />
           </div>
         </div>
+        <Intro />
+        <Footer />
       </div>
-      <Intro />
-      <Footer />
       <div>
       </div>
     </div>

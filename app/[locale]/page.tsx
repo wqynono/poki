@@ -7,11 +7,24 @@ import Footer from "@/components/footer"
 import { getTranslations } from "next-intl/server"
 import Intro from "@/components/intro"
 import adConfig from "@/data/adConfig"
+import siteMetadata from "@/data/siteMetadata"
 export default async function HomePage() {
   const t = await getTranslations("HomePage")
-
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": siteMetadata.siteUrl,
+    "url": siteMetadata.siteUrl
+  }
   return (
     <div className="min-h-screen">
+      <section>
+        <script
+          async
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </section>
       <div className="min-h-screen max-w-full mx-auto xl:max-w-[91.67%]">
         <div className="mx-auto px-4 py-6">
           {/* 主内容区域 */}
@@ -25,14 +38,14 @@ export default async function HomePage() {
 
             {/* 广告区域1 */}
             <div
-              className="col-span-3 row-span-3 row-start-4 md:col-span-3 md:row-span-3 lg:col-start-1 lg:col-span-3 lg:row-span-3 lg:row-start-2 border-1 border-[#cecece] rounded-lg overflow-hidden  "
+              className="col-span-3 row-span-3 row-start-4 md:col-span-3 md:row-span-3 lg:col-start-1 lg:col-span-3 lg:row-span-3 lg:row-start-2 border-1 border-[#cecece] rounded-lg overflow-hidden  bg-white"
               style={{ height: "auto !important" }}
             >
               <div style={{ height: "auto !important", minHeight: "0px !important" }}>
                 <div className="w-full flex items-center justify-center text-center text-[#747171] font-medium">
                   {t("advertisement")}
                 </div>
-                <div className="block min-w-[320px] min-height-[270px] mx-auto">
+                <div className="block min-w-[320px] min-height-[270px] mx-auto ">
                   <AdComponent data-ad-slot={adConfig.zfx[0]} data-ad-format={"auto"} data-full-width-responsive={true} />
                 </div>
               </div>

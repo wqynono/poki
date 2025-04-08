@@ -1057,28 +1057,6 @@ const defaultGamelist: Game[] = [
               "Japanese": null
        },
        {
-              "id": 2455,
-              "name": "level-devil-v2",
-              "sub_name": "",
-              "desc_text": "Level Devil 2 is a platformer game where players must run, jump, and overcome unexpected challenges to reach the exit and complete levels. The game features different challenging levels with increasing difficulty. Take your character through the levels to reach the exit door!\r\n\r\nWhat is Level Devil?\r\nLevel Devil is an attractive platformer game released by Unept Studios in 2023. Since its launch, the game has quickly attracted many players. The goal is very simple: you control the character to reach the door at each level. However, you will not know in advance what challenges you will face. From deep holes and sharp spikes to suddenly collapsing ceilings, all prevent you from reaching the door in the levels.",
-              "icon": "https://cdn.pokiter.com/html5New/level-devil-v2/icon.webp",
-              "html": "https://cdn.pokiter.com/html5New/level-devil-v2/index.html",
-              "platform": "web",
-              "category": "Strategy",
-              "tags": "",
-              "type": 1,
-              "is_use": "0",
-              "google_play": "",
-              "app_store": "",
-              "other_platform": "",
-              "rating": "4.9",
-              "file_size": "",
-              "screenshots": null,
-              "create_time": "19/2/2025 14:33:10",
-              "isfunny": "1",
-              "Japanese": null
-       },
-       {
               "id": 2440,
               "name": "bonefields",
               "sub_name": "",

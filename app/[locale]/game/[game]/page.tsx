@@ -10,7 +10,7 @@ import { History } from "lucide-react"
 import Intro from "@/components/intro"
 import adConfig from "@/data/adConfig"
 import type { Metadata } from 'next'
-
+import siteMetadata from "@/data/siteMetadata"
 type Props = {
   params: Promise<{ game: string }>
 }
@@ -30,13 +30,43 @@ export default async function GamePage({ params }: Props) {
   const t = await getTranslations("Game")
   const tHome = await getTranslations("HomePage")
   const { game } = await params
-  console.log(game)
+
   const gameDetail: Game = defaultGamelist.find((item) => item.name === game) || ({} as Game)
   const showGames = defaultGamelist.filter(
     (item) => item.category === gameDetail.category && item.name !== gameDetail.name,
   )
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "game",
+    "name": gameDetail.name,
+    "url": `${siteMetadata.siteUrl}/games/${game}`,
+    "description": gameDetail.desc_text,
+    "image": gameDetail.icon,
+    "genre": gameDetail.category,
+    "gamePlatform": gameDetail.type,
+    "applicationCategory": "Game",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": gameDetail.rating,
+      "ratingCount": 100,
+      "bestRating": "5",
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": siteMetadata.name
+    },
+    "datePublished": gameDetail.create_time,
+  }
   return (
     <div className="min-h-screen">
+      <section>
+        <script
+          async
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </section>
       <div className="min-h-screen max-w-full mx-auto xl:max-w-[91.67%]">
         <div className="mx-auto px-4 py-6">
           {/* 头部区域 */}
@@ -68,7 +98,7 @@ export default async function GamePage({ params }: Props) {
           >
             {/* 广告区域1 */}
             <div
-              className="col-span-3 row-span-3 row-start-2 col-start-1 border-1 border-[#cecece] rounded-lg overflow-hidden  min-h-[300px]
+              className="bg-white col-span-3 row-span-3 row-start-2 col-start-1 border-1 border-[#cecece] rounded-lg overflow-hidden  min-h-[300px]
               md:row-start-6 md:col-start-1
               lg:row-start-2 lg:col-start-7
               xl:row-start-2 xl:col-start-10

@@ -8,6 +8,7 @@ import Header from "@/components/Header"
 import Intro from "@/components/intro"
 import adConfig from "@/data/adConfig"
 import type { Metadata } from 'next'
+import siteMetadata from "@/data/siteMetadata"
 
 interface PageParams {
   locale: string
@@ -37,6 +38,18 @@ export default async function Search({
   const resolvedParams = await params
   const searchValue = resolvedParams.searchValue || ""
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": siteMetadata.name,
+    "url": siteMetadata.siteUrl,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${siteMetadata.siteUrl}/search/${searchValue}`,
+      "query-input": "required name=searchValue"
+    }
+  }
+
   // 使用服务器端翻译
   const t = await getTranslations("Search")
   const tGame = await getTranslations("Game")
@@ -59,6 +72,13 @@ export default async function Search({
 
   return (
     <>
+      <section>
+        <script
+          async
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </section>
       <div className="min-h-screen">
         <div className="max-w-full mx-auto xl:max-w-[91.67%]">
           <div className="mx-auto px-4 py-6">
@@ -73,7 +93,7 @@ export default async function Search({
 
               {/* 广告区域1 */}
               <div
-                className="col-span-3 row-span-3 row-start-4 md:col-span-3 md:row-span-3 lg:col-start-1 lg:col-span-3 lg:row-span-3 lg:row-start-2 border-1 border-[#cecece] rounded-lg overflow-hidden  "
+                className="col-span-3 row-span-3 row-start-4 md:col-span-3 md:row-span-3 lg:col-start-1 lg:col-span-3 lg:row-span-3 lg:row-start-2 border-1 border-[#cecece] rounded-lg overflow-hidden bg-white"
                 style={{ height: "auto !important" }}
               >
                 <div style={{ height: "auto !important", minHeight: "0px !important" }}>
