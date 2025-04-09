@@ -50,7 +50,5 @@ export default function robots(): MetadataRoute.Robots {
             }
         ],
         sitemap: `${URL}/sitemap.xml`,
-        // 可选：主机配置（通常不需要，Next.js会自动处理）
-        host: URL
     }
 }

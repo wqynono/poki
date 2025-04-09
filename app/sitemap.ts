@@ -4,7 +4,7 @@ import { laguageList } from '@/i18n/routing'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const URL = "https://cqlln.com"
-    const languages = laguageList // ['en', 'zh', 'ja', 'ko', 'ru']
+    const languages = laguageList // ['en']
 
     const defaultRoutes = [
         {
