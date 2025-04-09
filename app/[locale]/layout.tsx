@@ -69,7 +69,7 @@ export default async function LocaleLayout({
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1087148471815353"
         crossOrigin="anonymous"></script>
-
+      <script src="https://analytics.ahrefs.com/analytics.js" data-key="a3ixWYqxDNmdeUGFFfPp9w" async></script>
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <NextIntlClientProvider>
           <ThemeProviders>
