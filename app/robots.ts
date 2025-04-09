@@ -3,7 +3,7 @@ import { defaultGamelist, categoryList } from '@/data/game'
 import { laguageList } from '@/i18n/routing'
 
 export default function robots(): MetadataRoute.Robots {
-    const URL = "https://poki-my.vercel.app/"
+    const URL = "https://funnytiming.com/"
     const languages = laguageList // ['en', 'zh', 'ja', 'ko', 'ru']
 
 

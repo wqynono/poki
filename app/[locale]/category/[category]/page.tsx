@@ -8,6 +8,8 @@ import Intro from "@/components/intro";
 import adConfig from "@/data/adConfig";
 import type { Metadata } from 'next'
 import siteMetadata from "@/data/siteMetadata";
+import Head from "next/head";
+
 type Props = {
   params: Promise<{ category: string }>
 }
@@ -54,6 +56,8 @@ export default async function Category({ params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1279787934523230"
+          crossOrigin="anonymous"></script>
       </section>
       <div className="max-w-full mx-auto xl:max-w-[91.67%]">
         <div className="mx-auto px-4 py-6">

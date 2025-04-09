@@ -5,7 +5,7 @@ import Image from "next/image"
 import { defaultGamelist } from "@/data/game"
 export default function Intro() {
     const homeT = useTranslations("HomePage")
-    const domain = "cqlln.com"; // 网站域名
+    const domain = "funnytiming.com"; // 网站域名
     return (
         <div className="text-gray-700 text-sm leading-relaxed space-y-6 bg-white m-4">
             <div className="flex flex-wrap gap-4 mb-4">
@@ -30,7 +30,7 @@ export default function Intro() {
             </div>
             <div className="mb-4  p-6 rounded-xl primary-shadow ">
                 <h2 className="text-sm md:text-lg font-bold text-gray-800 mb-4">{homeT("catalogDesc", { domain })}</h2>
-                <h3 className="text-sm  font-medium text-gray-800 mb-4">
+                <div className="text-sm  font-medium text-gray-800 mb-4">
                     {homeT("popularGamesDesc")}
                     {defaultGamelist.slice(0, 8).map((game, index) => {
                         return index !== 6 ? (
@@ -40,7 +40,7 @@ export default function Intro() {
                         ) : <span>{homeT("andMore")}  </span>
                     })
                     }
-                </h3>
+                </div>
 
                 {/* 网站介绍*/}
                 <div>

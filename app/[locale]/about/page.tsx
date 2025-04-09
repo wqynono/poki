@@ -6,14 +6,14 @@ import type { Metadata } from 'next'
 export async function generateMetadata(): Promise<Metadata> {
 
     return {
-        title: "cqlln about title",
-        description: "cqlln about description",
+        title: "funnytiming about title",
+        description: "funnytiming about description",
     }
 }
 
 export default async function About() {
     const t = await getTranslations("About")
-    const domain = "cqlln.com"
+    const domain = "funnytiming.com"
 
     return (
         <div className="min-h-screen">

@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 export default async function Privacy() {
     const t = await getTranslations("Privacy")
-    const domain = "cqlln.com"
+    const domain = "funnytiming.com"
 
     return (
         <div className="min-h-screen">

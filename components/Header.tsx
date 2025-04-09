@@ -15,8 +15,8 @@ export default function Header() {
         <>
             <div className="col-span-1 h-full rounded-lg overflow-hidden primary-shadow transition-transform duration-300 bg-white">
                 <Link href="/" className="block h-1/2">
-                    <h1 className="flex items-center justify-center h-full text-3xl font-bold text-[#302B63]">
-                        cqlln
+                    <h1 className="flex items-center h-full text-xl font-bold p-2.5 text-[#302B63]">
+                        Funny<br />Timing
                     </h1>
                 </Link>
 
