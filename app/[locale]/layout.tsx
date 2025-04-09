@@ -67,6 +67,7 @@ export default async function LocaleLayout({
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
+      <meta name="google-site-verification" content="1-YVeURx5S-USmoHm-s1VM3uIiAYCf_-S8dsn3sFYsQ" />
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1087148471815353"
         crossOrigin="anonymous"></script>
       <script src="https://analytics.ahrefs.com/analytics.js" data-key="a3ixWYqxDNmdeUGFFfPp9w" async></script>
