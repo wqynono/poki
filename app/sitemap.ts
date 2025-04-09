@@ -3,7 +3,7 @@ import { defaultGamelist, categoryList } from '@/data/game'
 import { laguageList } from '@/i18n/routing'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const URL = "https://cqlln.com"
+    const URL = "https://poki-my.vercel.app/"
     const languages = laguageList // ['en']
 
     const defaultRoutes = [
@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${URL}/about`,
             lastModified: new Date(),
             changeFrequency: 'monthly' as const,
-            priority: 0.8,
+            priority: 0.5,
             alternates: {
                 languages: languages.reduce((acc, lang) => ({
                     ...acc,
@@ -47,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${URL}/privacy`,
             lastModified: new Date(),
             changeFrequency: 'monthly' as const,
-            priority: 0.8,
+            priority: 0.5,
             alternates: {
                 languages: languages.reduce((acc, lang) => ({
                     ...acc,
