@@ -16,7 +16,7 @@ export default function Intro() {
                         className="bg-white primary-shadow rounded-xl p-2 w-full md:w-[calc(16.666%-1rem)] */
                                 flex flex-row items-center justify-center md:flex-col" >
                         <Image
-                            src={`../public/${category.name.toLowerCase()}_tag.avif`}
+                            src={`/${category.name.toLowerCase()}_tag.avif`}
                             width={204}
                             height={204}
                             alt={category.name}
