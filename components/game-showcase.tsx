@@ -19,6 +19,7 @@ export default function GameShowcase({ game = {} as Game }: { game?: Game }) {
   const [dislikeCount, setDislikeCount] = useState(7)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [isMobile, setIsMobile] = useState(false)
+  console.log(game)
   // 检测是否为移动设备
   useEffect(() => {
     setLiked(isGameLiked(game))

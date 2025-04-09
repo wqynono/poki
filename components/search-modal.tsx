@@ -19,6 +19,7 @@ type SearchModalProps = {
 
 export default function SearchModal({ onClose, isOpen, searchQuery, setSearchQuery }: SearchModalProps) {
   const t = useTranslations("Search")
+  const tHome = useTranslations("HomePage")
   const router = useRouter()
 
   const [isMobile, setIsMobile] = useState(false)
@@ -210,7 +211,7 @@ export default function SearchModal({ onClose, isOpen, searchQuery, setSearchQue
                 </div>
               )}
 
-              <h2 className="text-lg md:text-xl font-bold my-4">{t("popularThisWeek")}</h2>
+              <h2 className="text-lg md:text-xl font-bold my-4">{tHome("popularThisWeek")}</h2>
 
               <div
                 className="grid gap-4 justify-center grid-cols-4 md:grid-cols-5 lg:grid-cols-7"

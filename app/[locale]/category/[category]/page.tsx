@@ -28,6 +28,7 @@ export async function generateMetadata(
 
 export default async function Category({ params }: Props) {
   const t = await getTranslations("HomePage"); // 获取 HomePage 翻译
+  const tCategories = await getTranslations("Categories"); // 获取 HomePage 翻译
   const { category } = await params; // 解构 category 参数
   const tDesc = await getTranslations("CategoriesDesc");
 
@@ -36,7 +37,7 @@ export default async function Category({ params }: Props) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": `${t(category)} - ${siteMetadata.name}`,
+    "name": `${tCategories(category.toLowerCase())} - ${siteMetadata.name}`,
     "url": siteMetadata.siteUrl,
     "description": `${tDesc(category.toLowerCase())}`,
     "mainEntity": {
