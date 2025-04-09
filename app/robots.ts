@@ -29,6 +29,7 @@ export default function robots(): MetadataRoute.Robots {
                     ...languages.map(lang => `/${lang}/about`),
                     ...languages.map(lang => `/${lang}/privacy`),
                     ...languages.map(lang => `/${lang}/search`),
+                    '/sitemap.xml', // 允许 sitemap.xml 路径
                 ],
                 disallow: [
                     // 禁止爬取可能产生重复内容的路径
