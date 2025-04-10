@@ -3,6 +3,7 @@ const siteMetadata = {
   title: 'funnytiming A free online games platform',
   author: 'funnytiming.com',
   name: 'funnytiming.com',
+  keyWords: ['funnytiming.com', ' free online games', ' online games', ' funnytiming', ' funnytiming.com'],
   headerTitle: 'Most popular games include hits like',
   description: 'funnytiming.com - A free online gaming platform. Our expert team"s goal is to provide the best selection of games on the web and deliver an excellent experience for players.',
   language: 'en-US, zh-CN, zh-TW, ja-JP, ko-KR,ru-RU',

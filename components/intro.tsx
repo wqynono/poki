@@ -32,13 +32,14 @@ export default function Intro() {
                 <h2 className="text-sm md:text-lg font-bold text-gray-800 mb-4">{homeT("catalogDesc", { domain })}</h2>
                 <div className="text-sm  font-medium text-gray-800 mb-4">
                     {homeT("popularGamesDesc")}
-                    {defaultGamelist.slice(0, 8).map((game, index) => {
-                        return index !== 6 ? (
-                            <Link key={index} href={`/game/${game.name}`} className="text-[#002b51] underline">
-                                <span>{game.name},  </span>
-                            </Link>
-                        ) : <span>{homeT("andMore")}  </span>
-                    })
+                    {
+                        defaultGamelist.slice(0, 8).map((game, index) => {
+                            return index !== 6 ? (
+                                <Link key={index} href={`/game/${game.name}`} className="text-[#002b51] underline">
+                                    <span>{game.name},  </span>
+                                </Link>
+                            ) : <span>{homeT("andMore")}  </span>
+                        })
                     }
                 </div>
 
