@@ -86,7 +86,7 @@ export default async function LocaleLayout({
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <NextIntlClientProvider>
           <ThemeProviders>
-            <GoogleAnalytics gaId={siteMetadata.analytics.googleAnalytics.googleAnalyticsId} />
+            {/* <GoogleAnalytics gaId={siteMetadata.analytics.googleAnalytics.googleAnalyticsId} /> */}
 
             {/* <SectionContainer>
             <SearchProvider searchConfig={siteMetadata.search as SearchConfig}> */}
