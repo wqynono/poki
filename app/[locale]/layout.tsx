@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     default: siteMetadata.title,
     template: `%s | ${siteMetadata.title}`,
   },
+  keywords: siteMetadata.keyWords,
   description: siteMetadata.description,
   openGraph: {
     title: siteMetadata.title,
@@ -32,13 +33,25 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '16x16' },
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/favicon.ico', sizes: '194x194' },
+      { url: '/favicon.ico', sizes: '192x192' },
+    ],
+    apple: [
+      { url: '/favicon.ico', sizes: '180x180' },
+    ],
+    shortcut: '/favicon.ico'
+  },
   robots: {
     index: true,
     follow: true,
+    "max-image-preview": "large",
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },

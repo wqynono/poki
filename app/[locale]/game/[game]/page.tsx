@@ -11,7 +11,6 @@ import Intro from "@/components/intro"
 import adConfig from "@/data/adConfig"
 import type { Metadata } from 'next'
 import siteMetadata from "@/data/siteMetadata"
-import Head from "next/head";
 
 type Props = {
   params: Promise<{ game: string }>

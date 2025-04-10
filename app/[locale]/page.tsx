@@ -8,7 +8,6 @@ import { getTranslations } from "next-intl/server"
 import Intro from "@/components/intro"
 import adConfig from "@/data/adConfig"
 import siteMetadata from "@/data/siteMetadata"
-import Head from "next/head"
 export default async function HomePage() {
   const t = await getTranslations("HomePage")
   const jsonLd = {

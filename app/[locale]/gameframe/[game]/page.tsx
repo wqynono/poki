@@ -9,6 +9,7 @@ import React from "react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
 import adConfig from "@/data/adConfig"
+import siteMetadata from "@/data/siteMetadata"
 
 
 export default function GamePage({ params }: any) {
@@ -24,9 +25,39 @@ export default function GamePage({ params }: any) {
       setShowGame(true)
     }, 7000)
   })
-
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "game",
+    "name": gameDetail.name,
+    "url": `${siteMetadata.siteUrl}/games/${game}`,
+    "description": gameDetail.desc_text,
+    "image": gameDetail.icon,
+    "genre": gameDetail.category,
+    "gamePlatform": gameDetail.type,
+    "applicationCategory": "Game",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": gameDetail.rating,
+      "ratingCount": 100,
+      "bestRating": "5",
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": siteMetadata.name
+    },
+    "datePublished": gameDetail.create_time,
+  }
   return (
     <div className="min-h-screen">
+      <section>
+        <script
+          async
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1279787934523230"
+          crossOrigin="anonymous"></script>
+      </section>
       <Link
         href={`/game/${gameDetail.name}`}
         className="fixed flex items-center flex-row p-1 top-2 left-0 z-30  text-black bg-white rounded-r-lg"
