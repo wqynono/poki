@@ -11,6 +11,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const entries: MetadataRoute.Sitemap = [];
 
     // 首页多语言
+    entries.push({
+        url: `${BASE_URL}`,
+        lastModified,
+        changeFrequency: 'yearly',
+        priority: 1,
+    });
     for (const lang of languages) {
         entries.push({
             url: `${BASE_URL}/${lang}`,
@@ -21,6 +27,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
 
     // 分类页多语言
+    for (const category of categoryList) {
+        entries.push({
+            url: `${BASE_URL}/${category.href}`,
+            lastModified,
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        });
+    }
     for (const lang of languages) {
         for (const category of categoryList) {
             entries.push({
@@ -36,12 +50,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const lang of languages) {
         for (const game of defaultGamelist) {
             entries.push({
-                url: `${BASE_URL}/${lang}${game.name}`,
+                url: `${BASE_URL}/${lang}/${game.name}`,
                 lastModified,
                 changeFrequency: 'daily',
                 priority: 0.9,
             });
         }
+    }
+    for (const game of defaultGamelist) {
+        entries.push({
+            url: `${BASE_URL}/${game.name}`,
+            lastModified,
+            changeFrequency: 'daily',
+            priority: 0.9,
+        });
     }
     return entries;
 }
