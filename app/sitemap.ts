@@ -32,6 +32,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }
     }
 
+    // 游戏页多语言
+    for (const lang of languages) {
+        for (const game of defaultGamelist) {
+            entries.push({
+                url: `${BASE_URL}/${lang}${game.name}`,
+                lastModified,
+                changeFrequency: 'daily',
+                priority: 0.9,
+            });
+        }
+    }
     return entries;
 }
 
